@@ -1,5 +1,5 @@
 import json
-from json import JSONDecodeError
+import os.path
 
 
 def write_active_json(file, pars_data: dict) -> None:
@@ -13,9 +13,11 @@ def write_active_json(file, pars_data: dict) -> None:
 
 def read_json(file: str) -> dict:
     """Чтение json"""
+    data = {}
+    if not os.path.exists(file):
+        return data
     with open(file, 'r') as f:
         try:
             data = json.load(f)
-        except JSONDecodeError:
-            data = {}
-    return data
+        finally:
+            return data

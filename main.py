@@ -62,14 +62,15 @@ def get_link_active():
             search = driver.find_element(By.CLASS_NAME, 'search_0')
             sleep(1)
             search.send_keys(active_name)
-            sleep(1)
+            sleep(2)
             active = driver.find_elements(By.CLASS_NAME, 'odd')[0]
             while True:
                 active_text = ' '.join(''.join(active.text.split('\n')[0]).split()[:-1])
                 if active_text != active_name:
-                    sleep(.2)
+                    sleep(.5)
                     continue
                 active.click()
+                sleep(2)
                 break
             link_active = driver.current_url
             result = {active_name: link_active}
@@ -81,5 +82,5 @@ def get_link_active():
 
 
 if __name__ == '__main__':
-    get_active_name()
+    # get_active_name()
     get_link_active()
